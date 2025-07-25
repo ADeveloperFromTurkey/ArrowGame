@@ -1,5 +1,5 @@
 # ArrowGame
-wiftUI ve SpriteKit kullanılarak geliştirilmiş açık kaynak bir ok fırlatma oyunudur.  
+SwiftUI ve SpriteKit kullanılarak geliştirilmiş açık kaynak bir ok fırlatma oyunudur.  
 Amacınız hedeflere en isabetli okları atarak yüksek skor yapmaktır.
 
 ---
