@@ -1,0 +1,2 @@
+canYazi.position = CGPoint(x: self.size.width * 0.5 , y: self.size.height * 0.875)
+skorYazi.position = CGPoint(x: self.size.width * 0.5 , y: self.size.height * 0.9)

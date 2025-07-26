@@ -1,0 +1,12 @@
+Teat No:1
+
+canAzalt()
+skorAzalt()
+
+There is no info,
+
+//Bug detected: Two collision detection scripts working, one of them not working.
+
+Solve: Erase that one script that doesnt work.
+
+Test Result: Debug Sucseed.

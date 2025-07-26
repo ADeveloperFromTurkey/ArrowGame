@@ -1,0 +1,31 @@
+Test No:1
+
+YAY x: 768.0  y: 409.6000061035156
+HEDEF x: 768.0  y: 1290.239990234375
+OK x:  768.0  Y:  919.324462890625
+
+atan(dy, dx) = TRUE info
+
+Test No:2
+
+YAY x: 768.0  y: 409.6000061035156
+HEDEF x: 768.0  y: 1290.239990234375
+OK x:  768.0  Y:  923.0975341796875
+OK,info dx: 0.0  dy: 367.1424560546875
+
+atan(dy, dx) = TRUE info
+
+Test No:3
+
+YAY x: 768.0  y: 409.6000061035156
+HEDEF x: 768.0  y: 1290.239990234375
+OK x:  768.0  Y:  919.324462890625
+OK,info dx: 0.0  dy: 370.91552734375
+atanOutput:  1.5707963267948966
+
+atan(dx, dy) = FALSE info
+// Bug detected: No:1 , Problem: False command usage, Solve: ?
+
+Test Result: Solve needed
+
+Solve: Remaking and debug code, changing some parameters
