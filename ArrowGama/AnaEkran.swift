@@ -21,6 +21,7 @@ import SpriteKit
 class AnaEkran: SKScene{
     
     let baslaButonu = SKSpriteNode(imageNamed: "başlaButonu")
+    let webButon = SKLabelNode(fontNamed: "Bion-Book")
     
     override func didMove(to view: SKView) {
         
@@ -51,10 +52,17 @@ class AnaEkran: SKScene{
         oyunYazi3.position = CGPoint(x: size.width/2, y: size.height/2 - 400)
         oyunYazi3.zPosition = 1
         self.addChild(oyunYazi3)
+        webButon.text = "Kaynak Kodu"
+        webButon.fontColor = .black
+        webButon.fontSize = 50
+        webButon.zPosition = 100
+        webButon.name = "webButon"
+        webButon.position = CGPoint(x: self.size.width/2, y: self.size.height * 0.1)
+        self.addChild(webButon)
         baslaButonu.setScale(1)
         baslaButonu.position = CGPoint(x: size.width/2, y: size.height/2)
         baslaButonu.zPosition = 1
-        addChild(baslaButonu)
+        self.addChild(baslaButonu)
         
         
     }
@@ -69,6 +77,10 @@ class AnaEkran: SKScene{
                 let Mtransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: Mtransition)
             }
+            if webButon.contains(dokunma){
+                if let url = URL(string: "https://github.com/ADeveloperFromTurkey/ArrowGame") {
+                UIApplication.shared.open(url)
+            }};
         }
     }
     

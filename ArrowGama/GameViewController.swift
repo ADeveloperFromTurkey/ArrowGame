@@ -34,6 +34,10 @@ class GameViewController: UIViewController {
         arkaSes.numberOfLoops = -1
         arkaSes.play()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+
+                NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -49,6 +53,13 @@ class GameViewController: UIViewController {
             view.showsFPS = false
             view.showsNodeCount = false
         }
+    }
+    @objc func appDidEnterBackground() {
+        arkaSes.pause()
+    }
+
+    @objc func appWillEnterForeground() {
+        arkaSes.play()
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
