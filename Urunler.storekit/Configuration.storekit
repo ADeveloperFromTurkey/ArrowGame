@@ -1,0 +1,125 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "nothing LOL",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "B1292FE0",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "20.00",
+      "familyShareable" : false,
+      "internalID" : "C572ED8E",
+      "localizations" : [
+        {
+          "description" : "Tüm Kostümleri Satın Al",
+          "displayName" : "Tüm Kostümleri Satın Al",
+          "locale" : "tr"
+        },
+        {
+          "description" : "Buy All Costumes",
+          "displayName" : "Buy All Costumes",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "allcostumes",
+      "promotionalImageID" : "69E267A8",
+      "referenceName" : "BuyAllCostumes",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "5",
+      "familyShareable" : false,
+      "internalID" : "415C86D7",
+      "localizations" : [
+        {
+          "description" : "200 Points",
+          "displayName" : "200 Points",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "200 Puan",
+          "displayName" : "200 Puan",
+          "locale" : "tr"
+        }
+      ],
+      "productID" : "200point",
+      "promotionalImageID" : "DAB57BC6",
+      "referenceName" : "200point",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "tr",
+    "_storefront" : "TUR",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : {
+          "index" : 1,
+          "type" : "purchase"
+        },
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

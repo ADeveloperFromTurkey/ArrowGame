@@ -21,6 +21,7 @@ import AVFoundation
 class GameViewController: UIViewController {
     
     var arkaSes = AVAudioPlayer()
+    var volumeObserver: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,20 @@ class GameViewController: UIViewController {
         let filePath = Bundle.main.path(forResource: "arkaplanSesi", ofType: "wav")!
         let ArkaplanSesiURL = URL(fileURLWithPath: filePath)
         
-        do {arkaSes = try AVAudioPlayer(contentsOf: ArkaplanSesiURL)}
+        do {arkaSes = try AVAudioPlayer(contentsOf: ArkaplanSesiURL)
+            try AVAudioSession.sharedInstance().setActive(true)
+            arkaSes.numberOfLoops = -1
+            arkaSes.volume = AVAudioSession.sharedInstance().outputVolume
+            arkaSes.prepareToPlay()
+            arkaSes.play()
+            
+            volumeObserver = AVAudioSession.sharedInstance().observe(\.outputVolume, options: [.new]) { _, change in
+                    if let newVolume = change.newValue {
+                        self.arkaSes.volume = newVolume * 3
+                    }
+                }
+        }
         catch { return print("cannot find file")}
-        
-        arkaSes.numberOfLoops = -1
-        arkaSes.play()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 

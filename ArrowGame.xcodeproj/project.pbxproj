@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EC7C367E2E38008E009E1133 /* Urunler.storekit in Resources */ = {isa = PBXBuildFile; fileRef = EC7C367D2E38008E009E1133 /* Urunler.storekit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		EC7C367D2E38008E009E1133 /* Urunler.storekit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Urunler.storekit; sourceTree = "<group>"; };
 		EC807A6D2E2AA88800A6F19D /* ArrowGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ArrowGame-Info.plist"; sourceTree = "<group>"; };
 		ECC843C42E166F1400781D7C /* ArrowGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArrowGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				EC807A6D2E2AA88800A6F19D /* ArrowGame-Info.plist */,
+				EC7C367D2E38008E009E1133 /* Urunler.storekit */,
 				ECC843C62E166F1400781D7C /* ArrowGama */,
 				ECC843C52E166F1400781D7C /* Products */,
 				EC128DED2E26603F00ACABCD /* Debugs */,
@@ -125,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7C367E2E38008E009E1133 /* Urunler.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

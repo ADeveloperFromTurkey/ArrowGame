@@ -17,11 +17,14 @@
 
 import Foundation
 import SpriteKit
+import UIKit
+import SwiftUI
 
 class AnaEkran: SKScene{
     
     let baslaButonu = SKSpriteNode(imageNamed: "başlaButonu")
     let webButon = SKLabelNode(fontNamed: "Bion-Book")
+    let storeButon = SKLabelNode(fontNamed: "Bion-Book")
     
     override func didMove(to view: SKView) {
         
@@ -63,6 +66,13 @@ class AnaEkran: SKScene{
         baslaButonu.position = CGPoint(x: size.width/2, y: size.height/2)
         baslaButonu.zPosition = 1
         self.addChild(baslaButonu)
+        storeButon.text = "Mağaza"
+        storeButon.fontColor = .black
+        storeButon.fontSize = 30
+        storeButon.zPosition = 100
+        storeButon.name = "storeButon"
+        storeButon.position = CGPoint(x: self.size.width/2 - 300, y: self.size.height * 0.1 + 10)
+        self.addChild(storeButon)
         
         
     }
@@ -81,6 +91,16 @@ class AnaEkran: SKScene{
                 if let url = URL(string: "https://github.com/ADeveloperFromTurkey/ArrowGame") {
                 UIApplication.shared.open(url)
             }};
+            if storeButon.contains(dokunma) {
+                let storeView = ContenView() // SwiftUI view
+                let hostingController = UIHostingController(rootView: storeView)
+                hostingController.modalPresentationStyle = .fullScreen
+                
+                if let window = self.view?.window,
+                   let rootVC = window.rootViewController {
+                    rootVC.present(hostingController, animated: true)
+                }
+            }
         }
     }
     
