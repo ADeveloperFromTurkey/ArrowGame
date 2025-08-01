@@ -20,6 +20,17 @@ import SwiftUI
 
 class OyunBitisSahnesi: SKScene {
     
+    var appUserData: UserData!
+    
+    init(size: CGSize,appUserData: UserData!) {
+        super.init(size: size)
+        self.appUserData = appUserData
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let yenidenBaslamaButonu = SKSpriteNode(imageNamed: "yenidenBaşlatButonu")
     let anaSayfaButonu = SKSpriteNode(imageNamed: "anaSayfaButonu")
     
@@ -80,6 +91,18 @@ class OyunBitisSahnesi: SKScene {
         anaSayfaButonu.zPosition = 103
         self.addChild(anaSayfaButonu)
         
+        let kazanc = skor * 2
+        appUserData.para += kazanc
+        
+        let kazancText = SKLabelNode(fontNamed: "Bion-Book")
+        kazancText.position = CGPoint(x: size.width / 2, y: size.height / 2 - 450)
+        kazancText.text = "Kazanç: \(kazanc) 🟡"
+        kazancText.horizontalAlignmentMode = .center
+        kazancText.fontSize = 100
+        kazancText.zPosition = 102
+        kazancText.fontColor = .white
+        self.addChild(kazancText)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -89,19 +112,19 @@ class OyunBitisSahnesi: SKScene {
             
             if yenidenBaslamaButonu.contains(dokunma) {
                 
-                let sceneToMoveTo = GameScene(size: self.size)
+                let sceneToMoveTo = GameScene(size: self.size, userData: appUserData)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let Mtransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: Mtransition)
-                
+                skor = 0
             }
             if anaSayfaButonu.contains(dokunma) {
                 
-                let sceneToMoveTo = AnaEkran(size: self.size)
+                let sceneToMoveTo = AnaEkran(size: self.size, userData: appUserData)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let Mtransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: Mtransition)
-                
+                skor = 0
             }
         }
         

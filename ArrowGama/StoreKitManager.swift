@@ -4,28 +4,30 @@
 //
 //  Created by Yusuf Erdem Ongun on 28.07.2025.
 //
-
 import StoreKit
+import SwiftUI // SwiftUI'ı import edin
 
 class StorekitManager: ObservableObject {
     var productIds = ["allcostumes","200point"]
     @Published private(set) var products : [Product] = []
     @Published private(set) var purhapseproducts : [Product]  = []
     
+    // userData property'si burada tanımlanmalı
+    var appUserData: UserData // BURAYI DÜZELTTİK: appUserData property'si eklendi
+
     var updateListenerTask: Task<Void, Error>? = nil
     
-    init() {
-        
+    // Başlatıcı userData parametresi almalı
+    init(userData: UserData) { // BURAYI DÜZELTTİK: init parametresi eklendi
+        self.appUserData = userData // BURAYI DÜZELTTİK: userData'yı appUserData'ya atıyoruz
         updateListenerTask = listenForTransactions()
         
         Task {
-            
             await request()
-            
             await updateCustomerProduct()
         }
-        
     }
+    
     func listenForTransactions() -> Task<Void, Error> {
             return Task.detached {
                 //iterate for incoming transactions
@@ -52,6 +54,8 @@ class StorekitManager: ObservableObject {
                 switch product.type {
                 case .nonConsumable:
                     products.append(product)
+                case .consumable:
+                    products.append(product)
                 default:
                     print("unknown ?")
                 }
@@ -60,6 +64,7 @@ class StorekitManager: ObservableObject {
             print("Failed to load product :(")
         }
     }
+    
     @MainActor
     func updateCustomerProduct() async {
         var purchasedProducts : [Product] = []
@@ -71,6 +76,14 @@ class StorekitManager: ObservableObject {
               case .nonConsumable:
                   if let product = products.first(where: {$0 .id == transications.productID}) {
                       purchasedProducts.append(product)
+                      if product.displayName == "Tüm Kostümleri Satın Al" {
+                          self.appUserData.sahipOlunanOklar = self.appUserData.oklar // BURAYI DÜZELTTİK: self.appUserData kullanıldı
+                          print(self.appUserData.sahipOlunanOklar)
+                      }
+                  }
+              case .consumable:
+                  if let product = products.first(where: {$0 .id == transications.productID}), product.displayName == "200 Puan" {
+                      self.appUserData.para += 200 // BURAYI DÜZELTTİK: self.appUserData kullanıldı
                   }
               default:
                   break

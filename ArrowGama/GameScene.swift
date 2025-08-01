@@ -26,7 +26,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let ok: UInt32 = 0b1
         static let hedef: UInt32 = 0b10
     }
-    
    
     let skorYazi = SKLabelNode(fontNamed: "Bion-Book")
     var can = 3
@@ -36,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let BaslaYazi1 = SKLabelNode(fontNamed: "Bion-Book")
     let BaslaYazi2 = SKLabelNode(fontNamed: "Bion-Book")
     
+    var appUserData: UserData!
     
     enum oyunDurumlari {
         case baslangic
@@ -53,12 +53,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let radius: CGFloat = 100.0
     private var lastFireTime = Date()
     var gameArea: CGRect
-    override init(size: CGSize) {
+    init(size: CGSize, userData: UserData) {
         let maxAspectRatio: CGFloat = 16.0 / 9.0
         let playableWidth = size.height / maxAspectRatio
         let margin = (size.width - playableWidth) / 2
         gameArea = CGRect(x: margin, y: 0, width: playableWidth, height: size.height)
         super.init(size: size)
+        self.appUserData = userData
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -105,6 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         kontrol()
+        
     }
     override func didMove(to view: SKView) {
         
@@ -123,10 +125,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hedef.position = CGPoint(x: self.size.width / 2, y: self.size.height * 0.63)
         hedef.zPosition = 2
         hedef.name = "hedef"
-        hedef.physicsBody = SKPhysicsBody(circleOfRadius: hedef.size.width / 5)
+        hedef.physicsBody = SKPhysicsBody(circleOfRadius: hedef.size.width / 2)
+        //print(hedef.size)
+        //print(hedef.physicsBody!)
         hedef.physicsBody!.affectedByGravity = false
         hedef.physicsBody!.categoryBitMask = PhysicsCategory.hedef
-        hedef.physicsBody!.collisionBitMask = PhysicsCategory.ok
+        hedef.physicsBody!.collisionBitMask = PhysicsCategory.none
         hedef.physicsBody!.contactTestBitMask = PhysicsCategory.ok
         hedef.alpha = 0
         self.addChild(hedef)
@@ -187,13 +191,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body1 = contact.bodyB
             body2 = contact.bodyA
         }
-        if body1.categoryBitMask == PhysicsCategory.ok && body2.categoryBitMask == PhysicsCategory.ok {
-            
-            
-            canAzalt()
-            skorAzalt()
-            artArdaOk = 0
-        }
         if body1.categoryBitMask == PhysicsCategory.ok && body2.categoryBitMask == PhysicsCategory.hedef {
             guard let ok = (body1.node as? Ok) ?? (body2.node as? Ok),
                   let hedef = (body1.node == ok ? body2.node : body1.node) as? SKSpriteNode else { return }
@@ -204,7 +201,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             let dx = ok.position.x - hedef.position.x
             let dy = ok.position.y - hedef.position.y
-            let angle = atan2(dy, dx) - .pi / 2 + .pi
+            let angle = atan2(dy, dx) + .pi / 2
             ok.hedefeCarpti = true
             ok.currentAngle = atan2(dy, dx)
             ok.radius = sqrt(dx*dx + dy*dy)
@@ -213,15 +210,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             skorEkle()
             artArdaOk += 1
         }
+        
     }
     func skorEkle() {
         skor += 1
         skorYazi.text = "Skor: \(skor)"
+        
     }
     func skorAzalt() {
         skor = skor - 1
         skorYazi.text = "Skor: \(skor)"
         //print("function called: skorAzalt")
+        
     }
     func canEkle(_ sayi: Int) {
         can += sayi
@@ -231,6 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let renkBekle = SKAction.wait(forDuration: 0.3)
         let renkSequence = SKAction.sequence([renkEfekt,renkBekle, renkSıfırla])
         canYazi.run(renkSequence)
+        
     }
     func canAzalt() {
         can = can - 1
@@ -247,6 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let renkSequence = SKAction.sequence([renkEfekt,renkBekle, renkSıfırla,renkBekle,renkEfekt,renkBekle, renkSıfırla])
             canYazi.run(renkSequence)
         }
+        
     }
     func oyunuBaslat() {
         durum = oyunDurumlari.oyunda
@@ -287,7 +289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func oktemilendiYazısı(){
         let yazi = SKLabelNode(fontNamed: "Bion-Book")
-        yazi.text = "Oklar Temilendi!"
+        yazi.text = "Oklar Temizlendi!"
         yazi.fontSize = 50
         yazi.fontColor = .white
         yazi.position = CGPoint(x: self.size.width * 0.5, y: 0 - yazi.frame.size.height)
@@ -352,28 +354,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     func sahneDegistir(){
-        let sceneToMoveTo = OyunBitisSahnesi(size: self.size)
+        let sceneToMoveTo = OyunBitisSahnesi(size: self.size, appUserData: appUserData)
         sceneToMoveTo.scaleMode = self.scaleMode
         let Mtransition = SKTransition.fade(withDuration: 0.5)
         self.view!.presentScene(sceneToMoveTo, transition: Mtransition)
     }
     func okfirlat() {
+        
         let currentTime = Date()
         if currentTime.timeIntervalSince(lastFireTime) > 0.5 {
             lastFireTime = currentTime
-            let ok = Ok(imageNamed: "ok")
-            ok.setScale(1)
+            let ok = Ok(imageNamed: "\(appUserData.secilenOk)")
+            ok.setScale(1.0)
             ok.name = "ok"
             ok.position = yay.position
             ok.zPosition = 1
-            ok.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: ok.size.width / 3, height: ok.size.height))
+            ok.physicsBody = SKPhysicsBody(rectangleOf: ok.size)
+            //print(ok.size)
+            //print(ok.physicsBody!)
             ok.physicsBody!.affectedByGravity = false
             ok.physicsBody!.categoryBitMask = PhysicsCategory.ok
             ok.physicsBody!.collisionBitMask = PhysicsCategory.ok
             ok.physicsBody!.contactTestBitMask = PhysicsCategory.ok | PhysicsCategory.hedef
             ok.physicsBody!.collisionBitMask = PhysicsCategory.ok
             ok.physicsBody!.categoryBitMask = PhysicsCategory.ok
-            ok.physicsBody!.isDynamic = true
+            //ok.physicsBody!.isDynamic = true
             ok.physicsBody!.affectedByGravity = false
             ok.physicsBody?.linearDamping = 0
             ok.physicsBody?.angularDamping = 0

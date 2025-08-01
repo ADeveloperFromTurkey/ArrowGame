@@ -1,4 +1,4 @@
-Teat No:1
+Test No:1
 
 canAzalt()
 skorAzalt()

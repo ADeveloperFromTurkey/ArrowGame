@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
     
     var arkaSes = AVAudioPlayer()
     var volumeObserver: NSKeyValueObservation?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +52,16 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            let scene = AnaEkran(size: CGSize(width: 1536, height: 2048))
                 // Set the scale mode to scale to fit the window
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                let scene = AnaEkran(size: CGSize(width: 1536, height: 2048), userData: appDelegate.appUserData)
                 scene.scaleMode = .aspectFill
-                
+            
                 // Present the scene
                 view.presentScene(scene)
+                } else {
+                fatalError("AppDelegate'e veya UserData'ya erişilemiyor!")
+            }
             
             view.ignoresSiblingOrder = true
             

@@ -15,12 +15,22 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 
-import Foundation
 import SpriteKit
 import UIKit
 import SwiftUI
 
 class AnaEkran: SKScene{
+    
+    var appUserData: UserData!
+    
+    init(size: CGSize, userData: UserData) {
+        super.init(size: size)
+        self.appUserData = userData
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     let baslaButonu = SKSpriteNode(imageNamed: "başlaButonu")
     let webButon = SKLabelNode(fontNamed: "Bion-Book")
@@ -74,7 +84,6 @@ class AnaEkran: SKScene{
         storeButon.position = CGPoint(x: self.size.width/2 - 300, y: self.size.height * 0.1 + 10)
         self.addChild(storeButon)
         
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -82,17 +91,22 @@ class AnaEkran: SKScene{
         for touch in touches{
             let dokunma = touch.location(in: self)
             if baslaButonu.contains(dokunma){
-                let sceneToMoveTo = GameScene(size: self.size)
+                let sceneToMoveTo = GameScene(size: self.size, userData: appUserData)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let Mtransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: Mtransition)
             }
             if webButon.contains(dokunma){
                 if let url = URL(string: "https://github.com/ADeveloperFromTurkey/ArrowGame") {
-                UIApplication.shared.open(url)
-            }};
+                    UIApplication.shared.open(url)
+                }};
             if storeButon.contains(dokunma) {
-                let storeView = ContenView() // SwiftUI view
+                guard let appUserDataToPass = self.appUserData else { // Değişken adı appUserData olmalı
+                        print("Hata: AnaEkran'daki appUserData nil. Mağaza açılamadı.")
+                        return
+                    }
+                
+                let storeView = ContentView(appUserData: appUserDataToPass) .environmentObject(appUserDataToPass)
                 let hostingController = UIHostingController(rootView: storeView)
                 hostingController.modalPresentationStyle = .fullScreen
                 
@@ -103,5 +117,4 @@ class AnaEkran: SKScene{
             }
         }
     }
-    
 }

@@ -1,0 +1,12 @@
+Test No:1
+
+(500.0, 500.0)
+<SKPhysicsBody> type:<Circle> representedObject:[<SKSpriteNode> name:'hedef' texture:[<SKTexture> 'hedef' (500 x 500)] position:{768, 1290.239990234375} scale:{1.00, 1.00} size:{500, 500} anchor:{0.5, 0.5} rotation:0.00]
+(500.0, 500.0)
+<SKPhysicsBody> type:<Rectangle> representedObject:[<SKSpriteNode> name:'ok' texture:[<SKTexture> 'ok2' (500 x 500)] position:{768, 409.60000610351562} scale:{1.00, 1.00} size:{500, 500} anchor:{0.5, 0.5} rotation:0.00]
+
+//Bug detected: ok.physicsBody! results the size of the "non-background" image
+
+Solve: Change the arrow files size
+
+Test Result: Debug Sucseed.
