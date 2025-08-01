@@ -4,6 +4,16 @@
 //
 //  Created by Yusuf Erdem Ongun on 28.07.2025.
 //
+//
+//  Copyright 2025 Yusuf Erdem Ongun
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+
 import SwiftUI
 import StoreKit
 import Combine
@@ -11,20 +21,12 @@ import Combine
 struct ContentView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    // appUserData'yı EnvironmentObject olarak alacak
-    @EnvironmentObject var appUserData: UserData // BURAYI DÜZELTTİK: Bu satırın mevcut olduğundan emin olun
+    @EnvironmentObject var appUserData: UserData
     
-    // StorekitManager'ı @StateObject olarak sadece TÜRÜNÜ belirterek tanımlayın.
-    // Eşittir (=) işaretiyle burada başlatmayın. Başlatma init içinde yapılacak.
-    @StateObject var storeKit: StorekitManager // BURAYI DÜZELTTİK: = StorekitManager() ifadesi kaldırıldı
+    @StateObject var storeKit: StorekitManager
     
     let columns = [GridItem(.flexible()) , GridItem(.flexible())]
-
-    // Custom initializer (başlatıcı) ile bağımlılıkları enjekte edin
-    init(appUserData: UserData) { // BURAYI DÜZELTTİK: init metodu eklendi
-        // @EnvironmentObject'ı sarmalayıcı (wrapper) ile doğru şekilde başlatın
-        // @StateObject'ı sarmalayıcı (wrapper) ile doğru şekilde başlatın.
-        // Burada StorekitManager() çağrılırken, init metodunun beklediği parametreleri (userData) doğru şekilde iletiyoruz.
+    init(appUserData: UserData) {
         self._storeKit = StateObject(wrappedValue: StorekitManager(userData: appUserData))
     }
     
@@ -168,10 +170,4 @@ func yazilariBelirle(_ ok: String) -> String {
     case "ok6": return "Dondurma"
     default:    return "Bilinmeyen Ok"
     }
-}
-
-#Preview {
-    // Burada ContentView'i başlatırken appUserData'yı sağlamanız gerekiyor.
-    ContentView(appUserData: UserData()) // UserData() yerine uygulamanızın gerçek UserData örneğini sağlayın
-        .environmentObject(UserData()) // EnvironmentObject olarak da sağlayın
 }

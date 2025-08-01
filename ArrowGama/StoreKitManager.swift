@@ -4,22 +4,21 @@
 //
 //  Created by Yusuf Erdem Ongun on 28.07.2025.
 //
+
 import StoreKit
-import SwiftUI // SwiftUI'ı import edin
+import SwiftUI
 
 class StorekitManager: ObservableObject {
     var productIds = ["allcostumes","200point"]
     @Published private(set) var products : [Product] = []
     @Published private(set) var purhapseproducts : [Product]  = []
     
-    // userData property'si burada tanımlanmalı
-    var appUserData: UserData // BURAYI DÜZELTTİK: appUserData property'si eklendi
+    var appUserData: UserData
 
     var updateListenerTask: Task<Void, Error>? = nil
     
-    // Başlatıcı userData parametresi almalı
-    init(userData: UserData) { // BURAYI DÜZELTTİK: init parametresi eklendi
-        self.appUserData = userData // BURAYI DÜZELTTİK: userData'yı appUserData'ya atıyoruz
+    init(userData: UserData) {
+        self.appUserData = userData
         updateListenerTask = listenForTransactions()
         
         Task {
@@ -77,13 +76,12 @@ class StorekitManager: ObservableObject {
                   if let product = products.first(where: {$0 .id == transications.productID}) {
                       purchasedProducts.append(product)
                       if product.displayName == "Tüm Kostümleri Satın Al" {
-                          self.appUserData.sahipOlunanOklar = self.appUserData.oklar // BURAYI DÜZELTTİK: self.appUserData kullanıldı
-                          print(self.appUserData.sahipOlunanOklar)
+                          self.appUserData.sahipOlunanOklar = self.appUserData.oklar
                       }
                   }
               case .consumable:
                   if let product = products.first(where: {$0 .id == transications.productID}), product.displayName == "200 Puan" {
-                      self.appUserData.para += 200 // BURAYI DÜZELTTİK: self.appUserData kullanıldı
+                      self.appUserData.para += 200
                   }
               default:
                   break
