@@ -64,17 +64,13 @@ class OyunBitisSahnesi: SKScene {
         skorLabel.fontColor = .white
         self.addChild(skorLabel)
         
-        let defaults = UserDefaults()
-        var yuksekSkor = defaults.integer(forKey: "yuksekSkor")
-        
-        if skor > yuksekSkor {
-            yuksekSkor = skor
-            defaults.set(yuksekSkor, forKey: "yuksekSkor")
+        if skor > appUserData.EnYuksekSkor {
+            appUserData.EnYuksekSkor = skor
         }
         
         let skorLabelUp = SKLabelNode(fontNamed: "Bion-Book")
         skorLabelUp.position = CGPoint(x: size.width / 2, y: size.height / 2 + 130)
-        skorLabelUp.text = "Yüksek Skor: \(yuksekSkor)"
+        skorLabelUp.text = "Yüksek Skor: \(appUserData.EnYuksekSkor)"
         skorLabelUp.horizontalAlignmentMode = .left
         skorLabelUp.fontSize = 50
         skorLabelUp.zPosition = 102

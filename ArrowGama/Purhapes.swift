@@ -50,9 +50,6 @@ struct ContentView: View {
                 VStack(alignment: .leading){
                     ProductView(id: storeKit.productIds[0], prefersPromotionalIcon: true)
                         .productViewStyle(.automatic)
-                    ProductView(id: storeKit.productIds[1], prefersPromotionalIcon: true)
-                        .productViewStyle(.automatic)
-                    
                 }
             }
             Tab("Eski Satın Alımlar",systemImage: "clock.badge.fill"){

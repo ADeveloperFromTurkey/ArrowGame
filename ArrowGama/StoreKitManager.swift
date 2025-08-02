@@ -76,12 +76,8 @@ class StorekitManager: ObservableObject {
                   if let product = products.first(where: {$0 .id == transications.productID}) {
                       purchasedProducts.append(product)
                       if product.displayName == "Tüm Kostümleri Satın Al" {
-                          self.appUserData.sahipOlunanOklar = self.appUserData.oklar
+                          appUserData.sahipOlunanOklar = appUserData.oklar
                       }
-                  }
-              case .consumable:
-                  if let product = products.first(where: {$0 .id == transications.productID}), product.displayName == "200 Puan" {
-                      self.appUserData.para += 200
                   }
               default:
                   break

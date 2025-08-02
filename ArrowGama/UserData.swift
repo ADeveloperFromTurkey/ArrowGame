@@ -33,13 +33,20 @@ class UserData: ObservableObject {
             UserDefaults.standard.set(sahipOlunanOklar, forKey: "sahipOlunanOklarListesi")
         }
     }
-    let oklarınParaları: [String: Int] = ["ok1": 100, "ok2": 200, "ok3": 300, "ok4": 250, "ok5": 300, "ok6": 150]
+    @Published var EnYuksekSkor: Int {
+        didSet {
+            UserDefaults.standard.set(EnYuksekSkor, forKey: "EnYuksekSkor")
+        }
+    }
+    let oklarınParaları: [String: Int] = ["ok1": 100, "ok2": 200, "ok3": 300, "ok4": 350, "ok5": 400, "ok6": 150]
     let oklar: [String] = ["ok1", "ok2", "ok3","ok4","ok5","ok6"]
+    
     
     init() {
         self.para = UserDefaults.standard.integer(forKey: "para")
         self.sahipOlunanOklar = UserDefaults.standard.stringArray(forKey: "sahipOlunanOklarListesi") ?? ["ok1"]
         self.secilenOk = UserDefaults.standard.string(forKey: "secilenOk") ?? "ok1"
+        self.EnYuksekSkor = UserDefaults.standard.integer(forKey: "EnYuksekSkor")
         if self.para == 0 && self.sahipOlunanOklar.isEmpty {
             self.sahipOlunanOklar = ["ok1"]
             self.secilenOk = "ok1"

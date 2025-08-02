@@ -35,6 +35,7 @@ class AnaEkran: SKScene{
     let baslaButonu = SKSpriteNode(imageNamed: "başlaButonu")
     let webButon = SKLabelNode(fontNamed: "Bion-Book")
     let storeButon = SKLabelNode(fontNamed: "Bion-Book")
+    let OynanisButon = SKLabelNode(fontNamed: "Bion-Book")
     
     override func didMove(to view: SKView) {
         
@@ -83,6 +84,45 @@ class AnaEkran: SKScene{
         storeButon.name = "storeButon"
         storeButon.position = CGPoint(x: self.size.width/2 - 300, y: self.size.height * 0.1 + 10)
         self.addChild(storeButon)
+        OynanisButon.text = "Oynanış"
+        OynanisButon.fontColor = .black
+        OynanisButon.fontSize = 30
+        OynanisButon.zPosition = 100
+        OynanisButon.name = "OynanisButon"
+        OynanisButon.position = CGPoint(x: self.size.width/2 + 300, y: self.size.height * 0.1 + 10)
+        self.addChild(OynanisButon)
+        let paraYazi = SKLabelNode(fontNamed: "Bion-Book")
+        paraYazi.text = "\(appUserData.para) 🟡"
+        paraYazi.fontSize = 50
+        paraYazi.fontColor = .white
+        paraYazi.zPosition = 102
+        paraYazi.position = CGPoint(x: size.width * 0.27, y: size.height/2)
+        paraYazi.horizontalAlignmentMode = .center
+        self.addChild(paraYazi)
+        let paraYazi2 = SKLabelNode(fontNamed: "Bion-Book")
+        paraYazi2.text = "Para:"
+        paraYazi2.fontSize = 50
+        paraYazi2.fontColor = .white
+        paraYazi2.zPosition = 102
+        paraYazi2.position = CGPoint(x: size.width * 0.27, y: size.height/2 + 50)
+        paraYazi2.horizontalAlignmentMode = .center
+        self.addChild(paraYazi2)
+        let yuksekSkorYazi = SKLabelNode(fontNamed: "Bion-Book")
+        yuksekSkorYazi.text = "\(appUserData.EnYuksekSkor)"
+        yuksekSkorYazi.fontSize = 70
+        yuksekSkorYazi.fontColor = .white
+        yuksekSkorYazi.zPosition = 102
+        yuksekSkorYazi.position = CGPoint(x: size.width * 0.73, y: size.height/2)
+        yuksekSkorYazi.horizontalAlignmentMode = .center
+        self.addChild(yuksekSkorYazi)
+        let yuksekSkorYazi2 = SKLabelNode(fontNamed: "Bion-Book")
+        yuksekSkorYazi2.text = "Yüksek Skor:"
+        yuksekSkorYazi2.fontSize = 30
+        yuksekSkorYazi2.fontColor = .white
+        yuksekSkorYazi2.zPosition = 102
+        yuksekSkorYazi2.position = CGPoint(x: size.width * 0.73, y: size.height/2 + 60)
+        yuksekSkorYazi2.horizontalAlignmentMode = .center
+        self.addChild(yuksekSkorYazi2)
         
     }
     
@@ -105,8 +145,17 @@ class AnaEkran: SKScene{
                         print("Hata: AnaEkran'daki appUserData nil. Mağaza açılamadı.")
                         return
                     }
-                
                 let storeView = ContentView(appUserData: appUserDataToPass) .environmentObject(appUserDataToPass)
+                let hostingController = UIHostingController(rootView: storeView)
+                hostingController.modalPresentationStyle = .fullScreen
+                
+                if let window = self.view?.window,
+                   let rootVC = window.rootViewController {
+                    rootVC.present(hostingController, animated: true)
+                }
+            }
+            if OynanisButon.contains(dokunma) {
+                let storeView = OynanisMenuView()
                 let hostingController = UIHostingController(rootView: storeView)
                 hostingController.modalPresentationStyle = .fullScreen
                 

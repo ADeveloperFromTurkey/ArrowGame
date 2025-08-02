@@ -34,27 +34,6 @@
       "promotionalImageID" : "69E267A8",
       "referenceName" : "BuyAllCostumes",
       "type" : "NonConsumable"
-    },
-    {
-      "displayPrice" : "5",
-      "familyShareable" : false,
-      "internalID" : "415C86D7",
-      "localizations" : [
-        {
-          "description" : "200 Points",
-          "displayName" : "200 Points",
-          "locale" : "en_US"
-        },
-        {
-          "description" : "200 Puan",
-          "displayName" : "200 Puan",
-          "locale" : "tr"
-        }
-      ],
-      "productID" : "200point",
-      "promotionalImageID" : "DAB57BC6",
-      "referenceName" : "200point",
-      "type" : "Consumable"
     }
   ],
   "settings" : {

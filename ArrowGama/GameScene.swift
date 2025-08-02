@@ -76,7 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let dy = ok1.position.y - ok2.position.y
                 let distance = sqrt(dx*dx + dy*dy)
 
-                if distance < 60 {
+                if distance < ok1.size.width {
                     ok1.removeFromParent()
                     ok2.removeFromParent()
                     canAzalt()
