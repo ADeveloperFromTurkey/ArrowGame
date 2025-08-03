@@ -9,7 +9,7 @@ import StoreKit
 import SwiftUI
 
 class StorekitManager: ObservableObject {
-    var productIds = ["allcostumes","200point"]
+    var productIds = ["com.allcostumes"]
     @Published private(set) var products : [Product] = []
     @Published private(set) var purhapseproducts : [Product]  = []
     

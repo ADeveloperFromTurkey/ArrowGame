@@ -32,10 +32,10 @@ struct OynanisMenuView: View {
             .font(.headline)
             .padding()
             .multilineTextAlignment(.leading)
-            .foregroundColor(.black)
+            .foregroundColor(.color)
         HStack{
             Spacer()
-            Text(">Yusuf Erdem Ongun      ")
+            Text("> Yusuf Erdem Ongun      ")
                 .font(.title2)
             
         }
@@ -43,3 +43,4 @@ struct OynanisMenuView: View {
         Spacer()
     }
 }
+

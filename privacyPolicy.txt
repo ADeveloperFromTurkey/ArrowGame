@@ -1,0 +1,12 @@
+Ok Oyunu, kullanıcıların gizliliğine önem verir. Bu uygulama hiçbir kişisel veriyi toplamaz, depolamaz ya da üçüncü taraflarla paylaşmaz.
+Uygulamada sunulan tüm işlevler yalnızca cihaz üzerinde çalışır.
+Satın alımlar App Store altyapısı ile gerçekleştirilir ve Apple tarafından yönetilir.
+
+Toplanan Veriler:
+
+    Uygulama, herhangi bir kişisel veri toplamaz.
+
+    Analitik veya reklam verisi toplanmamaktadır.
+
+İletişim:
+Gizlilikle ilgili sorularınız varsa, bizimle şu e-posta adresinden iletişime geçebilirsiniz: yusuferdemongun@icloud.com

@@ -23,14 +23,9 @@
           "description" : "Tüm Kostümleri Satın Al",
           "displayName" : "Tüm Kostümleri Satın Al",
           "locale" : "tr"
-        },
-        {
-          "description" : "Buy All Costumes",
-          "displayName" : "Buy All Costumes",
-          "locale" : "en_US"
         }
       ],
-      "productID" : "allcostumes",
+      "productID" : "com.allcostumes",
       "promotionalImageID" : "69E267A8",
       "referenceName" : "BuyAllCostumes",
       "type" : "NonConsumable"
